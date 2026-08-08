@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.2
+
+- Instalador ahora copia automáticamente el contenido de `walker-images/` del repositorio a `~/.config/rofi/walker-images/`.
+- Documentación actualizada con galería de imágenes y recomendaciones de tamaño `1080×1600 px`.
+- Manual HTML mejor organizado para explicar el directorio de imágenes y el flujo de instalación.
+
 ## 1.0.1
 
 - Renombrado integral de la identidad anterior a LoboViejo79.

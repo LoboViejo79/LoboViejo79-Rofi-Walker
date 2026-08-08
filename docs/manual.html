@@ -124,10 +124,30 @@ cd LoboViejo79-Rofi-Walker</pre></div>
 
 <section id="imagenes">
 <h2>8. Preparación de imágenes</h2>
-<p>La resolución recomendada es <strong>800×1200 px</strong>, orientación vertical y relación <strong>2:3</strong>. El script admite PNG, JPG/JPEG y WEBP.</p>
-<div class="card note"><strong>Por qué 800×1200:</strong> ofrece nitidez suficiente para la columna visual sin cargar archivos innecesariamente grandes. El panel del tema está dimensionado para mantener una proporción muy cercana a 2:3.</div>
-<p>Las imágenes se colocan en:</p><pre>~/.config/rofi/walker-images/</pre>
-<p>Cada apertura ejecuta <code>find</code> + <code>shuf -n 1</code>, de modo que el resultado cambia aleatoriamente.</p>
+<p>La resolución recomendada es <strong>1080×1600 px</strong>, orientación vertical y relación <strong>2:3</strong>. El script admite PNG, JPG/JPEG y WEBP.</p>
+<div class="card note"><strong>Nota de actualización:</strong> el instalador ahora copia automáticamente el contenido del directorio <code>walker-images/</code> del repositorio a <code>~/.config/rofi/walker-images/</code> durante la instalación.</div>
+<h3>Directorio de imágenes del repositorio</h3>
+<p>Para incluir imágenes de ejemplo o un conjunto propio, colocá tus archivos en:</p>
+<pre>walker-images/</pre>
+<p>El instalador copiará todos los archivos válidos desde ese directorio al entorno del usuario, preservando subcarpetas.</p>
+<h3>Directorio de imágenes instalado</h3>
+<p>El launcher usa:</p>
+<pre>~/.config/rofi/walker-images/</pre>
+<p>Si querés agregar más imágenes después de la instalación, solo copiá nuevos archivos PNG/JPG/JPEG/WEBP a ese directorio.</p>
+<div class="gallery">
+  <figure>
+    <img src="assets/launcher-final.png" alt="Launcher final con imagen vertical">
+    <figcaption>Launcher final con imagen vertical de panel izquierdo.</figcaption>
+  </figure>
+  <figure>
+    <img src="assets/kde-shortcut.png" alt="Ejemplo configuración de atajos KDE">
+    <figcaption>Configuración de atajos KDE y la ruta del script.</figcaption>
+  </figure>
+</div>
+<div class="card note"><strong>Por qué 1080×1600:</strong> ofrece alta definición para el panel vertical, mantiene la relación 2:3 y respeta el diseño del tema sin cargar archivos innecesariamente grandes.</div>
+<h3>Galería</h3>
+<p>La siguiente vista ilustra cómo el launcher muestra las imágenes verticales dentro del panel izquierdo y la experiencia visual general con el tema activado.</p>
+<p>Cada apertura ejecuta <code>find</code> + <code>shuf -n 1</code> para seleccionar una imagen aleatoria.</p>
 </section>
 
 <section id="kde">
@@ -196,6 +216,9 @@ git commit -m "Initial release: LoboViejo79 Rofi Walker Style"
 git branch -M main
 git remote add origin URL_DEL_REPOSITORIO
 git push -u origin main</pre>
+<h3>Directorio `walker-images/`</h3>
+<p>Para mantener el repositorio limpio, podés dejar `walker-images/` con solo `README.txt` y `.gitkeep`. Si querés incluir imágenes, agregá únicamente archivos que tengas derecho a distribuir.</p>
+<p>Durante la instalación, el instalador copiará las imágenes del directorio del repositorio a <code>~/.config/rofi/walker-images/</code>.</p>
 <div class="card warn"><strong>Derechos de imágenes:</strong> no publiques ilustraciones de terceros salvo que tengas autorización o una licencia compatible. El directorio <code>walker-images/</code> puede permanecer vacío; cada usuario puede agregar sus propias imágenes después de instalar.</div>
 </section>
 

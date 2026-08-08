@@ -49,6 +49,10 @@ figure{margin:26px 0;background:#21232d;border:1px solid var(--border);padding:1
 figure img{width:100%;display:block;border-radius:3px}
 figcaption{color:var(--muted);font-size:.9rem;padding:10px 3px 1px}
 .tree{color:#d7d8e8}
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin:24px 0}
+.gallery figure{background:var(--panel);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.gallery img{width:100%;display:block}
+.gallery figcaption{padding:12px 14px;color:var(--muted);font-size:.95rem}
 .steps{counter-reset:step}
 .step{counter-increment:step;margin:18px 0;padding:18px 18px 18px 64px;background:var(--panel);border:1px solid var(--border);position:relative;border-radius:6px}
 .step:before{content:counter(step);position:absolute;left:18px;top:16px;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--purple);color:var(--bg);font-weight:700}

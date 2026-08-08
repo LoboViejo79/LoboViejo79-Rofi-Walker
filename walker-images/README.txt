@@ -6,9 +6,11 @@ Formatos admitidos:
 - WEBP
 
 Resolución recomendada:
-- 800 x 1200 px
+- 1080 x 1600 px
 - orientación vertical
 - relación 2:3
+
+Si ponés tus imágenes en este directorio antes de ejecutar `./install.sh`, el instalador las copiará automáticamente a `~/.config/rofi/walker-images/`.
 
 El script elegirá una imagen aleatoria cada vez que abras Rofi.
 

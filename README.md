@@ -19,7 +19,7 @@ Este proyecto nació a partir de la inspiración visual del contenido de **Grapl
 - Diseño compacto estilo Walker.
 - Paleta Dracula.
 - Imagen vertical aleatoria en cada apertura.
-- Resolución recomendada para imágenes: **800×1200 px (2:3)**.
+- Resolución recomendada para imágenes: **1080×1600 px (2:3)**.
 - JetBrainsMono Nerd Font instalada automáticamente si no está presente.
 - Instalador multi-distro.
 - Backup de archivos LoboViejo79 existentes antes de sobrescribirlos.
@@ -109,7 +109,33 @@ El proyecto se desarrolló y ajustó visualmente con Rofi 2.x. En repositorios D
 
 ## Imágenes
 
-El repositorio no necesita distribuir arte de terceros. Cada usuario puede copiar sus propias imágenes a `~/.config/rofi/walker-images/`. Para publicar este proyecto en GitHub, asegurate de tener permiso para redistribuir cualquier imagen que agregues.
+El repositorio incluye el directorio `walker-images/` para imágenes opcionales. Si ponés tus PNG/JPG/JPEG/WEBP allí antes de ejecutar `./install.sh`, el instalador copiará automáticamente ese contenido a `~/.config/rofi/walker-images/`.
+
+La resolución recomendada es **1080×1600 px** con orientación vertical y relación **2:3**. Usa solo imágenes que tengas derecho a redistribuir.
+
+## Actualización
+
+Esta versión documenta un cambio importante: el instalador ahora copia el contenido de `walker-images/` del repositorio al directorio de usuario durante la instalación. Esto facilita distribuir ejemplos y dejar el launcher listo con imágenes al instalar.
+
+## Publicar en GitHub
+
+Si querés subir este proyecto a GitHub, podés hacerlo de dos formas:
+
+1. Mantener `walker-images/` vacío o con solo `README.txt` y `.gitkeep`, de modo que el repositorio no contenga imágenes personales.
+2. Incluir imágenes solo si tenés permiso para redistribuirlas, en cuyo caso el instalador copiará esas imágenes al directorio de usuario durante la instalación.
+
+Ejemplo mínimo para publicar:
+
+```bash
+git init
+git add .
+git commit -m "Agregar proyecto LoboViejo79 Rofi Walker Style"
+git branch -M main
+git remote add origin URL_DEL_REPOSITORIO
+git push -u origin main
+```
+
+> Si decidís incluir imágenes en el repositorio, asegúrate de que sean propias o libres para compartir. Si querés mantener el repo ligero, dejá solo el directorio `walker-images/` con `README.txt` y `.gitkeep`.
 
 ## Documentación completa
 

@@ -134,20 +134,25 @@ DESKTOP
 }
 
 copy_optional_images() {
-    shopt -s nullglob
-    local images=("$SCRIPT_DIR"/walker-images/*.png "$SCRIPT_DIR"/walker-images/*.jpg "$SCRIPT_DIR"/walker-images/*.jpeg "$SCRIPT_DIR"/walker-images/*.webp)
-    if (( ${#images[@]} > 0 )); then
-        cp -n "${images[@]}" "$IMAGE_DIR/" || true
-        ok "Imágenes incluidas copiadas a $IMAGE_DIR"
+    local src_dir="$SCRIPT_DIR/walker-images"
+    if [[ -d "$src_dir" ]]; then
+        info "Copiando imágenes desde el repositorio a $IMAGE_DIR"
+        find "$src_dir" -type f \(
+            -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.webp'
+        \) -print0 | while IFS= read -r -d '' file; do
+            local rel_path="${file#$src_dir/}"
+            mkdir -p "$IMAGE_DIR/$(dirname "$rel_path")"
+            cp -n "$file" "$IMAGE_DIR/$rel_path"
+        done
+        ok "Imágenes del directorio walker-images copiadas a $IMAGE_DIR"
     fi
-    shopt -u nullglob
 }
 
 final_message() {
     printf '\n'
     ok "$PROJECT_NAME instalado."
     printf '\nDirectorio de imágenes:\n  %s\n' "$IMAGE_DIR"
-    printf '\nResolución recomendada:\n  800x1200 px (vertical, relación 2:3)\n'
+    printf '\nResolución recomendada:\n  1080x1600 px (vertical, relación 2:3)\n'
     printf '\nComando de prueba:\n  %s/loboviejo79-launcher.sh\n' "$SCRIPT_DEST_DIR"
     printf '\nAtajo KDE recomendado:\n  Preferencias del sistema → Teclado → Atajos → Añadir nuevo → Orden o guion\n'
     printf '  Comando: %s/loboviejo79-launcher.sh\n' "$SCRIPT_DEST_DIR"
