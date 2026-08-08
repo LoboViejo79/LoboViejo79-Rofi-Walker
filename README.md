@@ -117,6 +117,12 @@ La resolución recomendada es **1080×1600 px** con orientación vertical y rela
 
 Esta versión documenta un cambio importante: el instalador ahora copia el contenido de `walker-images/` del repositorio al directorio de usuario durante la instalación. Esto facilita distribuir ejemplos y dejar el launcher listo con imágenes al instalar.
 
+## Galería
+
+La documentación incluye una galería de imágenes basada en `walker-images/`. Podés verla desde el manual HTML:
+
+[Ver galería en docs/manual.html](docs/manual.html#imagenes)
+
 ## Publicar en GitHub
 
 Si querés subir este proyecto a GitHub, podés hacerlo de dos formas:

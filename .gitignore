@@ -1,9 +1,5 @@
 # Imágenes personales del usuario
-walker-images/*.png
-walker-images/*.jpg
-walker-images/*.jpeg
-walker-images/*.webp
-!walker-images/.gitkeep
+# Las imágenes del directorio walker-images/ ahora pueden subirse al repositorio si se desea.
 
 # Archivos temporales
 *.swp
