@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LoboViejo79 Rofi Walker Style — Manual completo</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <div class="hero">
+    <div>
+      <h1>LoboViejo79 Rofi<br>Walker Style</h1>
+      <p>Manual de instalación, diseño, automatización y mantenimiento de una adaptación en Rofi inspirada en el launcher Walker mostrado por Graplo, pensada especialmente para KDE Plasma 6 sobre Wayland, con estética Dracula, imagen vertical aleatoria y soporte para Arch Linux, Debian/Ubuntu y Fedora.</p>
+      <div class="badges"><span class="badge">Rofi</span><span class="badge">Dracula</span><span class="badge">KDE Plasma 6</span><span class="badge">Wayland</span><span class="badge">Arch</span><span class="badge">Debian</span><span class="badge">Fedora</span></div>
+    </div>
+    <img src="assets/launcher-final.png" alt="Resultado final LoboViejo79 Rofi">
+  </div>
+</header>
+<div class="layout">
+<nav>
+  <h2>Contenido</h2>
+  <a href="#objetivo">1. Objetivo</a>
+  <a href="#inspiracion">2. Inspiración y créditos</a>
+  <a href="#resultado">3. Resultado</a>
+  <a href="#arquitectura">4. Arquitectura</a>
+  <a href="#requisitos">5. Requisitos</a>
+  <a href="#instalacion">6. Instalación automática</a>
+  <a href="#manual">7. Instalación manual</a>
+  <a href="#imagenes">8. Imágenes</a>
+  <a href="#kde">9. Atajo KDE</a>
+  <a href="#tema">10. Tema y colores</a>
+  <a href="#launcher">11. Script launcher</a>
+  <a href="#diagnostico">12. Diagnóstico</a>
+  <a href="#problemas">13. Problemas frecuentes</a>
+  <a href="#desinstalar">14. Desinstalación</a>
+  <a href="#github">15. Publicar en GitHub</a>
+  <a href="#fuentes">16. Fuentes y créditos</a>
+</nav>
+<main>
+<section id="objetivo">
+<h2>1. Objetivo del proyecto</h2>
+<p>El proyecto conserva Rofi como motor de búsqueda de aplicaciones y modifica su presentación para recrear una experiencia visual de tipo Walker dentro de <strong>KDE Plasma 6 + Wayland</strong>. La meta es un launcher compacto con una columna de ilustración a la izquierda, buscador y aplicaciones a la derecha, selección violeta y tipografía monoespaciada.</p>
+<div class="card ok"><strong>Decisión de diseño:</strong> Rofi sigue siendo el lanzador. No se instala Walker ni Elephant. La intención es trasladar la idea visual a Rofi, reduciendo dependencias y manteniendo una integración sencilla con KDE Plasma 6 sobre Wayland.</div>
+</section>
+
+<section id="inspiracion">
+<h2>2. Inspiración y créditos</h2>
+<p>La inspiración principal de este proyecto proviene del contenido de <strong>Graplo</strong> en YouTube. En su escritorio, Graplo utiliza <strong>Walker</strong> como lanzador y presenta una composición con imagen vertical a la izquierda, campo de búsqueda y lista compacta de aplicaciones. Esa presentación fue el punto de partida para investigar cómo reflejar una experiencia similar utilizando <strong>Rofi</strong>.</p>
+<div class="card note"><strong>Crédito:</strong> agradecimiento especial a <a href="https://www.youtube.com/@Graplo">Graplo — YouTube</a> por la inspiración visual que dio origen a esta adaptación.</div>
+<p><strong>LoboViejo79 Rofi Walker Style</strong> es una implementación independiente. No es un fork de Walker ni está afiliada con Graplo. El objetivo del proyecto es reinterpretar esa idea en Rofi y facilitar su uso principalmente en <strong>KDE Plasma 6 + Wayland</strong>, conservando al mismo tiempo compatibilidad con otras sesiones donde Rofi funcione correctamente.</p>
+</section>
+
+<section id="resultado">
+<h2>3. Resultado final</h2>
+<figure><img src="assets/launcher-final.png" alt="Launcher final"><figcaption>Resultado final alcanzado en Rofi: imagen vertical, Search más grueso, lista compacta e identidad Dracula. La composición general fue inspirada por el launcher Walker mostrado por Graplo.</figcaption></figure>
+</section>
+
+<section id="arquitectura">
+<h2>4. Arquitectura</h2>
+<pre class="tree">Rofi
+├── modo drun
+├── iconos de aplicaciones
+├── tema RASI
+│   ├── panel izquierdo
+│   ├── icon-wallpaper
+│   ├── Search
+│   └── listview
+└── loboviejo79-launcher.sh
+    ├── busca imágenes
+    ├── selecciona una con shuf
+    └── inyecta filename mediante -theme-str</pre>
+<p>La imagen se implementa como un widget <code class="inline">icon-wallpaper</code> y no como <code class="inline">background-image</code>. Esto evita el efecto mosaico observado en las primeras pruebas.</p>
+</section>
+
+<section id="requisitos">
+<h2>5. Requisitos y compatibilidad</h2>
+<table><thead><tr><th>Componente</th><th>Uso</th></tr></thead><tbody>
+<tr><td>Rofi</td><td>Launcher y motor <code>drun</code>.</td></tr>
+<tr><td>findutils</td><td>Busca imágenes dentro del directorio.</td></tr>
+<tr><td>coreutils</td><td>Proporciona <code>shuf</code> para selección aleatoria.</td></tr>
+<tr><td>JetBrainsMono Nerd Font</td><td>Tipografía del tema.</td></tr>
+<tr><td>fontconfig</td><td>Actualiza y consulta la caché de fuentes.</td></tr>
+<tr><td>curl + xz</td><td>Descarga y extracción automática de la Nerd Font.</td></tr>
+</tbody></table>
+<div class="card warn">El aspecto fue afinado con Rofi 2.x. Debian estable puede proporcionar Rofi 1.7.x. El tema está diseñado para ser compatible con 1.7.x/2.x, pero puede haber pequeñas diferencias visuales entre versiones.</div>
+</section>
+
+<section id="instalacion">
+<h2>6. Instalación automática</h2>
+<div class="steps">
+<div class="step"><strong>Extraer el proyecto.</strong><pre>unzip LoboViejo79-Rofi-Walker.zip
+cd LoboViejo79-Rofi-Walker</pre></div>
+<div class="step"><strong>Ejecutar el instalador.</strong><pre>chmod +x install.sh
+./install.sh</pre></div>
+<div class="step"><strong>Agregar imágenes.</strong><pre>cp /ruta/a/tus/imagenes/* ~/.config/rofi/walker-images/</pre></div>
+<div class="step"><strong>Probar.</strong><pre>~/.config/rofi/scripts/loboviejo79-launcher.sh</pre></div>
+</div>
+<h3>Qué hace install.sh</h3>
+<p>Detecta la familia de distribución usando <code>/etc/os-release</code> y el gestor disponible. Instala Rofi y dependencias, descarga JetBrainsMono Nerd Font si hace falta, crea backups de una instalación LoboViejo79 previa, copia el tema, copia el launcher y crea una entrada <code>.desktop</code>.</p>
+<table><thead><tr><th>Familia</th><th>Comando usado</th></tr></thead><tbody>
+<tr><td>Arch y derivados</td><td><code>pacman -S --needed rofi ...</code></td></tr>
+<tr><td>Debian/Ubuntu y derivados</td><td><code>apt-get install rofi ...</code></td></tr>
+<tr><td>Fedora y derivados</td><td><code>dnf install rofi ...</code></td></tr>
+</tbody></table>
+</section>
+
+<section id="manual">
+<h2>7. Instalación manual</h2>
+<p>Si no se desea usar el instalador, la estructura necesaria es:</p>
+<pre>~/.config/rofi/
+├── themes/
+│   └── loboviejo79-walker.rasi
+├── scripts/
+│   └── loboviejo79-launcher.sh
+└── walker-images/
+    ├── 01.jpg
+    ├── 02.png
+    └── ...</pre>
+<p>Después:</p>
+<pre>chmod +x ~/.config/rofi/scripts/loboviejo79-launcher.sh
+~/.config/rofi/scripts/loboviejo79-launcher.sh</pre>
+</section>
+
+<section id="imagenes">
+<h2>8. Preparación de imágenes</h2>
+<p>La resolución recomendada es <strong>800×1200 px</strong>, orientación vertical y relación <strong>2:3</strong>. El script admite PNG, JPG/JPEG y WEBP.</p>
+<div class="card note"><strong>Por qué 800×1200:</strong> ofrece nitidez suficiente para la columna visual sin cargar archivos innecesariamente grandes. El panel del tema está dimensionado para mantener una proporción muy cercana a 2:3.</div>
+<p>Las imágenes se colocan en:</p><pre>~/.config/rofi/walker-images/</pre>
+<p>Cada apertura ejecuta <code>find</code> + <code>shuf -n 1</code>, de modo que el resultado cambia aleatoriamente.</p>
+</section>
+
+<section id="kde">
+<h2>9. Crear el atajo en KDE Plasma</h2>
+<figure><img src="assets/kde-shortcut.png" alt="Configuración de atajos KDE"><figcaption>KDE Plasma 6 → Preferencias del sistema → Teclado → Atajos → Añadir nuevo → Orden o guion.</figcaption></figure>
+<p>Usar como comando la ruta absoluta:</p>
+<pre>/home/TU_USUARIO/.config/rofi/scripts/loboviejo79-launcher.sh</pre>
+<p>Un atajo práctico es <kbd>Meta</kbd> + <kbd>Espacio</kbd>. Si ya está ocupado, KDE solicitará reasignarlo. Se recomienda no usar <code>~</code> en este campo y guardar la ruta completa.</p>
+</section>
+
+<section id="tema">
+<h2>10. Tema, colores y geometría</h2>
+<table><thead><tr><th>Variable</th><th>Color</th><th>Uso</th></tr></thead><tbody>
+<tr><td>bg</td><td>#282a36</td><td>Fondo principal Dracula.</td></tr>
+<tr><td>bg-alt</td><td>#303341</td><td>Panel lateral.</td></tr>
+<tr><td>bg-input</td><td>#343746</td><td>Search.</td></tr>
+<tr><td>fg</td><td>#f8f8f2</td><td>Texto.</td></tr>
+<tr><td>purple</td><td>#bd93f9</td><td>Borde y selección.</td></tr>
+<tr><td>cyan</td><td>#8be9fd</td><td>Color auxiliar.</td></tr>
+<tr><td>pink</td><td>#ff79c6</td><td>Color auxiliar.</td></tr>
+<tr><td>green</td><td>#50fa7b</td><td>Color auxiliar.</td></tr>
+</tbody></table>
+<p>La ventana final usa 545×395 px, columna izquierda de 165 px y panel derecho de 380 px. La barra Search utiliza <code>padding: 9px 12px</code>, modificación que produjo el grosor final elegido.</p>
+</section>
+
+<section id="launcher">
+<h2>11. Funcionamiento del launcher</h2>
+<p>El script valida que Rofi exista, comprueba el tema y el directorio de imágenes, escoge un archivo aleatorio y ejecuta:</p>
+<pre>rofi \
+  -show drun \
+  -show-icons \
+  -theme "$THEME" \
+  -theme-str "icon-wallpaper { filename: \"$ROFI_IMAGE\"; }"</pre>
+<p>El uso de <code>filename</code> en el widget icon evita que la imagen se repita. En las primeras pruebas se utilizó <code>background-image</code>, que produjo mosaico; después se corrigió la arquitectura.</p>
+</section>
+
+<section id="diagnostico">
+<h2>12. Diagnóstico</h2>
+<p>El proyecto incluye:</p><pre>./check.sh</pre>
+<p>Muestra distribución, sesión gráfica, versión de Rofi, existencia del tema y launcher, fuente detectada y cantidad de imágenes.</p>
+</section>
+
+<section id="problemas">
+<h2>13. Solución de problemas</h2>
+<h3>Permiso denegado</h3><pre>chmod +x ~/.config/rofi/scripts/loboviejo79-launcher.sh</pre>
+<h3>No aparecen imágenes</h3><pre>find ~/.config/rofi/walker-images -maxdepth 1 -type f</pre>
+<p>Verificar que sean PNG, JPG, JPEG o WEBP.</p>
+<h3>La imagen aparece diminuta</h3><p>Comprobar que el tema instalado sea la versión incluida en este paquete, donde <code>icon-wallpaper</code> tiene <code>size: 385px</code> y <code>expand: true</code>.</p>
+<h3>La imagen se repite</h3><p>No usar <code>background-image</code>. La versión final usa <code>icon-wallpaper { filename: ...; }</code>.</p>
+<h3>El atajo de KDE no abre</h3><p>Usar la ruta absoluta, comprobar permiso de ejecución y lanzar el script manualmente desde una terminal para ver errores.</p>
+</section>
+
+<section id="desinstalar">
+<h2>14. Desinstalación</h2>
+<pre>./uninstall.sh</pre>
+<p>El desinstalador elimina el tema, launcher y entrada de aplicación del proyecto, pero conserva Rofi, las imágenes personales y los backups.</p>
+<p>Para quitar también la Nerd Font local:</p><pre>./uninstall.sh --remove-font</pre>
+</section>
+
+<section id="github">
+<h2>15. Preparar el repositorio para GitHub</h2>
+<p>El ZIP ya contiene una estructura apta para repositorio. Se recomienda:</p>
+<pre>git init
+git add .
+git commit -m "Initial release: LoboViejo79 Rofi Walker Style"
+git branch -M main
+git remote add origin URL_DEL_REPOSITORIO
+git push -u origin main</pre>
+<div class="card warn"><strong>Derechos de imágenes:</strong> no publiques ilustraciones de terceros salvo que tengas autorización o una licencia compatible. El directorio <code>walker-images/</code> puede permanecer vacío; cada usuario puede agregar sus propias imágenes después de instalar.</div>
+</section>
+
+<section id="fuentes">
+<h2>16. Fuentes técnicas y créditos</h2>
+<ul>
+<li><a href="https://www.youtube.com/@Graplo"><strong>Graplo — canal de YouTube</strong></a>: inspiración visual original del proyecto y del concepto Walker reinterpretado aquí en Rofi.</li>
+<li><a href="https://davatorium.github.io/rofi/">Documentación oficial de Rofi</a></li>
+<li><a href="https://archlinux.org/packages/extra/x86_64/rofi/">Paquete Rofi — Arch Linux</a></li>
+<li><a href="https://packages.debian.org/stable/x11/rofi">Paquete Rofi — Debian</a></li>
+<li><a href="https://packages.fedoraproject.org/pkgs/rofi/rofi">Paquete Rofi — Fedora</a></li>
+<li><a href="https://github.com/ryanoasis/nerd-fonts">Nerd Fonts — repositorio oficial</a></li>
+</ul>
+<p>La parte visual y conceptual reconoce expresamente a Graplo como fuente de inspiración. La implementación, scripts, tema RASI, instalador y documentación de este repositorio corresponden al proyecto LoboViejo79.</p>
+</section>
+</main>
+</div>
+<footer>LoboViejo79 Rofi Walker Style · Manual 1.0.1 · 2026</footer>
+</body>
+</html>

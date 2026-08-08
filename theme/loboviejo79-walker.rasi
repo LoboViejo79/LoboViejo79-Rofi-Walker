@@ -1,0 +1,170 @@
+/* ============================================================
+   LoboViejo79 Rofi - Walker Style
+   KDE Plasma 6 / Wayland
+   Compatible with Rofi 1.7.x / 2.x
+   ============================================================ */
+
+* {
+    bg:             #282a36;
+    bg-alt:         #303341;
+    bg-input:       #343746;
+
+    fg:             #f8f8f2;
+    fg-muted:       #8b93b5;
+
+    purple:         #bd93f9;
+    cyan:           #8be9fd;
+    pink:           #ff79c6;
+    green:          #50fa7b;
+
+    font: "JetBrainsMono Nerd Font 11";
+}
+
+window {
+    width: 545px;
+    height: 395px;
+
+    location: center;
+    anchor: center;
+
+    background-color: @bg;
+
+    border: 2px;
+    border-color: @purple;
+    border-radius: 2px;
+
+    padding: 0px;
+
+    children: [ mainbox ];
+}
+
+mainbox {
+    orientation: horizontal;
+
+    spacing: 0px;
+    padding: 0px;
+    margin: 0px;
+
+    background-color: @bg;
+
+    children: [ imagebox, contentbox ];
+}
+
+imagebox {
+    orientation: vertical;
+
+    width: 165px;
+
+    padding: 0px;
+    margin: 0px;
+
+    background-color: @bg-alt;
+
+    children: [ icon-wallpaper ];
+}
+
+icon-wallpaper {
+    expand: true;
+    squared: false;
+    size: 385px;
+
+    horizontal-align: 0.5;
+    vertical-align: 0.5;
+
+    padding: 0px;
+    margin: 0px;
+
+    background-color: transparent;
+}
+
+contentbox {
+    orientation: vertical;
+
+    width: 380px;
+
+    padding: 10px;
+    spacing: 7px;
+
+    background-color: @bg;
+
+    children: [ inputbar, listview ];
+}
+
+inputbar {
+    padding: 9px 12px;
+
+    background-color: @bg-input;
+
+    border: 0px;
+    border-radius: 0px;
+
+    children: [ entry ];
+}
+
+entry {
+    placeholder: "Search";
+
+    text-color: @fg;
+    placeholder-color: @fg-muted;
+
+    background-color: transparent;
+
+    vertical-align: 0.5;
+}
+
+listview {
+    columns: 1;
+    lines: 8;
+
+    fixed-height: true;
+    dynamic: false;
+
+    scrollbar: false;
+
+    spacing: 2px;
+
+    padding: 0px;
+    margin: 0px;
+
+    background-color: transparent;
+}
+
+element {
+    height: 39px;
+
+    padding: 4px 8px;
+    margin: 0px;
+
+    background-color: transparent;
+
+    border: 0px;
+    border-radius: 0px;
+
+    children: [ element-icon, element-text ];
+}
+
+element selected {
+    background-color: @purple;
+}
+
+element-icon {
+    size: 25px;
+
+    margin: 0px 10px 0px 0px;
+
+    vertical-align: 0.5;
+
+    background-color: transparent;
+}
+
+element-text {
+    vertical-align: 0.5;
+
+    background-color: transparent;
+
+    text-color: @fg;
+}
+
+element-text selected {
+    text-color: @bg;
+}

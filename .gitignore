@@ -1,0 +1,11 @@
+# Imágenes personales del usuario
+walker-images/*.png
+walker-images/*.jpg
+walker-images/*.jpeg
+walker-images/*.webp
+!walker-images/.gitkeep
+
+# Archivos temporales
+*.swp
+*~
+.DS_Store
