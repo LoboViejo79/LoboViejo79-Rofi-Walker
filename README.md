@@ -130,6 +130,22 @@ Si querés subir este proyecto a GitHub, podés hacerlo de dos formas:
 1. Mantener `walker-images/` vacío o con solo `README.txt` y `.gitkeep`, de modo que el repositorio no contenga imágenes personales.
 2. Incluir imágenes solo si tenés permiso para redistribuirlas, en cuyo caso el instalador copiará esas imágenes al directorio de usuario durante la instalación.
 
+Para publicar este manual como sitio web con GitHub Pages:
+
+- Configurá GitHub Pages en `Settings → Pages`.
+- Source: `main` branch, carpeta `/docs`.
+- Luego accedé a:
+
+```text
+https://LoboViejo79.github.io/LoboViejo79-Rofi-Walker/manual.html
+```
+
+También podés usar este enlace directo al repositorio de imágenes:
+
+https://github.com/LoboViejo79/LoboViejo79-Rofi-Walker/tree/main/walker-images
+
+Si querés, puedo crear también un `docs/index.html` que redirija automáticamente a `manual.html` para que el sitio principal abra la guía de forma directa.
+
 Ejemplo mínimo para publicar:
 
 ```bash
